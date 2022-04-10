@@ -13,7 +13,7 @@ const nextBtn = $('.btn-next');
 const randomBtn = $('.btn-random');
 const repeatBtn = $('.btn-repeat');
 const playlist = $('.playlist');
-
+import listSongs from './song.js';
 
 const app = {
     currentIndex: 0,
@@ -21,69 +21,7 @@ const app = {
     isRandom: false,
     isRepeat: false,
     config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
-
-    songs: [{
-            name: 'BlindingLinght',
-            singer: 'TheWeekend',
-            path: "./access/music/song1.mp3",
-            image: "./access/img/song1.jpg"
-        },
-        {
-            name: 'DarkSide',
-            singer: 'AlanWalker',
-            path: "./access/music/song2.mp3",
-            image: "./access/img/song2.jpg"
-        },
-        {
-            name: 'LemonTree',
-            singer: 'FoolsGarden',
-            path: "./access/music/song3.mp3",
-            image: "./access/img/song3.jpg"
-        },
-        {
-            name: 'Modony',
-            singer: 'TheFatLauren',
-            path: "./access/music/song4.mp3",
-            image: "./access/img/song4.jpg"
-        },
-        {
-            name: 'Nevada',
-            singer: 'Monstercat',
-            path: "./access/music/song5.mp3",
-            image: "./access/img/song5.jpg"
-        },
-        {
-            name: 'OutSide',
-            singer: 'CalvinHarris',
-            path: "./access/music/song6.mp3",
-            image: "./access/img/song6.jpg"
-        },
-        {
-            name: 'SaveYourTea',
-            singer: 'TheWeekend',
-            path: "./access/music/song7.mp3",
-            image: "./access/img/song7.jpg"
-        },
-        {
-            name: 'SummmerTime',
-            singer: 'K391',
-            path: "./access/music/song8.mp3",
-            image: "./access/img/song8.jpg"
-        },
-        {
-            name: 'TakeMeToChurch',
-            singer: 'Hozier',
-            path: "./access/music/song9.mp3",
-            image: "./access/img/song9.jpg"
-        },
-        {
-            name: 'Unstoppable',
-            singer: 'Sia',
-            path: "./access/music/song10.mp3",
-            image: "./access/img/song10.jpg"
-        }
-    ],
-
+    songs: listSongs,
     setConfig: function(key, value) {
         this.config[key] = value;
         localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config))
@@ -154,7 +92,7 @@ const app = {
             // xử lí khi tiến độ bài hát thay đổi
         audio.ontimeupdate = function() {
             if (audio.duration) {
-                progressPercent = Math.floor(audio.currentTime / audio.duration * 100);
+                const progressPercent = Math.floor(audio.currentTime / audio.duration * 100);
                 progress.value = progressPercent;
             }
         };
